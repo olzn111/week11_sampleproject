@@ -40,3 +40,19 @@ File Download & Security
 
 관련 소스파일 및 메서드명을 함께 명시
 각 문항은 2~4문장 정도로 간단히 설명
+
+## STEP 3. Customizing
+Text: list.html, form.html, detail.html
+제목: 파일 아카이브 / 상단 문구: HANDONG · FILE ARCHIVE / 버튼: + 새 자료 업로드, 자료 등록하기 / 수정 완료 / - 빈 목록 안내: 등록된 자료가 없습니다...
+
+Style: app.css
+전체 배경색: #e5beca / 제목(h1) 색상 / 링크(a:hover) 호버 시 색상 변경 및 밑줄 추가
+
+UI/Data : list.html, detail.html
+목록 첨부 수: 파란색 알약 뱃지(파일 N개) 또는 없음 표시 / 상세 첨부 목록
+
+따라서 줄글로 정리하자면 ,
+Text: 게시판의 목적에 맞게 메인 제목을 '자료 공유 게시판'에서 '파일 아카이브'로 바꾸고, 등록/수정 버튼과 안내 문구를 이에 맞게 변경했다.
+Style: app.css에서 전체 배경색을 #f5f7fb에서 #e5beca로 변경했고, 색상 및 링크 마우스 호버 효과를 추가했다.
+UI/Data: 목록 화면에서는 첨부파일 개수를 부트스트랩 배지로 딱 볼 수 있게 만들어봤고, 상세 화면에서는 contentType 배지와 함께 파일 크기를 KB/MB 단위로 소수점까지 보여줄 수 있도록 개선해봤다.
+
