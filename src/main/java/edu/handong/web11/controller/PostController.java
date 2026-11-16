@@ -36,12 +36,15 @@ public class PostController {
         model.addAttribute("postForm", new PostForm());
         return "posts/form";
     }
-
+/* /posts 요청을 받아서 폼 데이터와 첨부파일 리스트 files를 전달받는다.*/
     @PostMapping("/posts")
     public String create(@Valid @ModelAttribute("postForm") PostForm form, BindingResult errors,
                          @RequestParam(name = "files", required = false) List<MultipartFile> files) {
+       //내용이나 제목 유효성 검사에서 실패하면 저장하지 않고 다시 작성으로 돌아간다.
         if (errors.hasErrors()) return "posts/form";
+        // 파일 리스트가 null이면 빈 리스트로 넘어가 PostService에서 게시글과 첨부파일을 DB에 저장하고 생성된 게시글 id를 받는다.
         Long id = posts.create(form, files == null ? List.of() : files);
+       //새로고침 시 중복 등록을 막기 위해 방금 만든 게시글의 상세 페이지로 리다이렉트한다.
         return "redirect:/posts/" + id;
     }
 
