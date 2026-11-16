@@ -56,3 +56,9 @@ Text: 게시판의 목적에 맞게 메인 제목을 '자료 공유 게시판'�
 Style: app.css에서 전체 배경색을 #f5f7fb에서 #e5beca로 변경했고, 색상 및 링크 마우스 호버 효과를 추가했다.
 UI/Data: 목록 화면에서는 첨부파일 개수를 부트스트랩 배지로 딱 볼 수 있게 만들어봤고, 상세 화면에서는 contentType 배지와 함께 파일 크기를 KB/MB 단위로 소수점까지 보여줄 수 있도록 개선해봤다.
 
+
+
+--------------------------------------------
+Project Information: 프로젝트 소개 
+GitHub Repository URL : https://github.com/olzn111/week11_sampleproject_web
+

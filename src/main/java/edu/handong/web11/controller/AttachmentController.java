@@ -23,7 +23,7 @@ public class AttachmentController {
 
     @GetMapping("/{id}/download")
     public ResponseEntity<Resource> download(@PathVariable Long id) {
-       // 전달받은 첨부파일 id로 DB에서 파일을 조회하고, 없으면 404 Not Found 에러를 보낸다.
+        // 전달받은 첨부파일 id로 DB에서 파일을 조회하고, 없으면 404 Not Found 에러를 보낸다.
         Attachment file = attachments.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "첨부파일이 없습니다."));
         // FileStorageService로 디스크에 저장된 실제 파일을 읽고 Resource 객체로 가져온다.
@@ -38,5 +38,25 @@ public class AttachmentController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, disposition)
                 .body(resource);
     }
+
     // STUDENT TODO: GET /attachments/{id}/view (image preview).
+    @GetMapping("/{id}/view")
+    public ResponseEntity<Resource> view(@PathVariable Long id) {
+        Attachment file = attachments.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "첨부파일이 없습니다."));
+
+        if (file.getContentType() == null || !file.getContentType().startsWith("image/")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미지 파일만 미리보기를 지원합니다.");
+        }
+
+        Resource resource = storage.load(file);
+        String disposition = ContentDisposition.inline()
+                .filename(file.getOriginalFilename(), StandardCharsets.UTF_8)
+                .build().toString();
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(file.getContentType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, disposition)
+                .body(resource);
+    }
 }
